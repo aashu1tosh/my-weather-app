@@ -8,6 +8,8 @@ import snow from '../assets/snow.avif'
 import haze from '../assets/haze.avif'
 import clouds from '../assets/clouds.avif'
 
+
+//change directory case
 interface BackgroundProps{
     id: number
 }
