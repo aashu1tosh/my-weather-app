@@ -20,8 +20,6 @@ function Background({ id } : BackgroundProps) {
         return (<img src={clearSky} alt="" />);
     else {
         let i: number = firstDigit(id);
-        console.log(`Prtinting i ${i}`);
-        console.log(`Prtinting i ${id}`);
         switch (i) {
             case 2:
                 return (<img src={thunderstrom} alt="" />);

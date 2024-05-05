@@ -4,11 +4,11 @@ import Background from '../background/Background';
 
 const Body = () => {
 
-    const [cityName, setCityName] = useState<String | null>('Kathmandu');
-    const [temp, setTemp] = useState<Number | null>();
-    const [description, setDescription] = useState<String | null>();
-    const [weatherId, setWeatherID] = useState<Number | null>();
-    const [divBackGroundColor, setDivBackGroundColor] = useState<String | null>();
+    const [cityName, setCityName] = useState<string | null>('Kathmandu');
+    const [temp, setTemp] = useState<number | null>();
+    const [description, setDescription] = useState<string | null>();
+    const [weatherId, setWeatherID] = useState<number>(0);
+    const [divBackGroundColor, setDivBackGroundColor] = useState<string | null>();
     const [loading, setLoading] = useState<true | false | null>();
 
     useEffect(() => {
@@ -71,14 +71,14 @@ const Body = () => {
 
 
     return (
-        <div className='main-body' style={{ backgroundColor: divBackGroundColor }}>
+        <div className='main-body' style={{ backgroundColor: divBackGroundColor??""}}>
             <Background id={weatherId} />
             <div className="city-display">
                 {!loading ? cityName : "Loading"}
             </div>
             <input name="city"
                 placeholder='City Name Please'
-                onKeyDown={(e) => {
+                onKeyDown={(e:any) => {
                     if (e.key === "Enter") {
                         let city = e.target.value;
                         setCityName(city.charAt(0).toUpperCase() + city.slice(1));
