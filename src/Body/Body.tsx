@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import './Body.css'
-import Background from '../Background/Background';
+import Background from '../background/Background';
 
 const Body = () => {
 
