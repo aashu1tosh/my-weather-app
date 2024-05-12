@@ -1,6 +1,21 @@
 import { useEffect, useState } from 'react'
 import './Body.css'
 import Background from '../background/Background';
+import bs from 'bikram-sambat';
+
+interface WeatherDays {
+    list: {
+        main: {
+            temp: number;
+        };
+        weather: {
+            id: number;
+            main: string;
+            description: string;
+        }[];
+    }[];
+
+}
 
 const Body = () => {
 
@@ -10,42 +25,9 @@ const Body = () => {
     const [weatherId, setWeatherID] = useState<number>(0);
     const [divBackGroundColor, setDivBackGroundColor] = useState<string | null>();
     const [loading, setLoading] = useState<true | false | null>();
+    const [fiveDays, setFiveDays] = useState<WeatherDays[]>([]);
 
     useEffect(() => {
-        // console.log("Only fetch ")
-        // console.log(
-        //     fetch(`${import.meta.env.VITE_APP_WEATHER_URL}${cityName}&appid=${import.meta.env.VITE_APP_WEATHER_API_KEY}`)
-
-        // )
-        // console.log("After using then once")
-        // console.log(
-        //     fetch(`${import.meta.env.VITE_APP_WEATHER_URL}${cityName}&appid=${import.meta.env.VITE_APP_WEATHER_API_KEY}`)
-        //     .then((res) => {
-        //         return res.json();
-        //       })
-        // )
-
-        // console.log("After using then twice")
-        // console.log(
-        //     fetch(`${import.meta.env.VITE_APP_WEATHER_URL}${cityName}&appid=${import.meta.env.VITE_APP_WEATHER_API_KEY}`)
-        //         .then((res) => {
-        //             return res.json();
-        //         })
-        //         .then((data) => {
-        //             setDivBackGroundColor(null);
-        //             console.log('printing data');
-        //             setTemp(data.main.temp);
-        //             setWeatherID(data.weather[0].id);
-        //             setDescription(data.weather[0].description.toUpperCase());
-        //         })
-        //         .catch(() => {
-        //             setCityName('Something Went Wrong');
-        //             setTemp(0);
-        //             setDescription('');
-        //             setDivBackGroundColor('red');
-        //         })
-        // )
-
         setLoading(true);
         fetch(`${import.meta.env.VITE_APP_WEATHER_URL}${cityName}&appid=${import.meta.env.VITE_APP_WEATHER_API_KEY}`)
             .then((res) => {
@@ -53,11 +35,13 @@ const Body = () => {
             })
             .then((data) => {
                 setDivBackGroundColor(null);
-                console.log('printing data');
-                setTemp(data.main.temp);
-                setWeatherID(data.weather[0].id);
-                setDescription(data.weather[0].description.toUpperCase());
+                setTemp(data.list[0].main.temp);
+                setWeatherID(data.list[0].weather[0].id);
+                setDescription(data.list[0].weather[0].description.toUpperCase());
                 setLoading(false);
+                setFiveDays(data.list.slice(1, 6));
+                // setFiveDays(data.list);
+                console.log(bs.toBik_euro('2024-05-12'));
             })
             .catch(() => {
                 setCityName('Something Went Wrong');
@@ -66,21 +50,23 @@ const Body = () => {
                 setDivBackGroundColor('red');
                 setLoading(false);
             })
-        console.log(cityName)
+        // console.log(cityName)
     }, [cityName])
-
+    const date: Date = new Date
+    
 
     return (
-        <div className='main-body' style={{ backgroundColor: divBackGroundColor??""}}>
+        <div className='main-body' style={{ backgroundColor: divBackGroundColor ?? "" }}>
             <Background id={weatherId} />
             <div className="city-display">
                 {!loading ? cityName : "Loading"}
+                <p>{bs.toBik_euro(date.toJSON().split('T')[0])}</p>
             </div>
             <input name="city"
                 placeholder='City Name Please'
-                onKeyDown={(e:any) => {
+                onKeyDown={(e: any) => {
                     if (e.key === "Enter") {
-                        let city = e.target.value;
+                        const city: string = e.target.value;
                         setCityName(city.charAt(0).toUpperCase() + city.slice(1));
                         e.target.value = '';
                     }
@@ -98,6 +84,22 @@ const Body = () => {
                     <p>{description ? description : 'Error!'}</p></>
                     : "Loading"}
 
+            </div>
+            
+            <div className="future-display">
+                {!loading ? (
+                    fiveDays.map((day, index) => (
+                        <div className='future-time'>
+                            <div key={index}>
+                                {/* Render content for each day */}
+                                {/* <p>{day.dt_txt.slice(' ')[1]}</p> */}
+                                <p>{day.dt_txt.split(' ')[1]}</p>
+                                <p>{day.main.temp}K</p>
+                                <p>{day.weather[0].description.toUpperCase()}</p>
+                            </div>
+                        </div>
+                    ))
+                ) : "Loading"}
             </div>
         </div>
     )

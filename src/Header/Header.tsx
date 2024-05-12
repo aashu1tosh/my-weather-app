@@ -1,4 +1,3 @@
-import React from 'react'
 import './Header.css'
 
 function Header() {
@@ -6,6 +5,8 @@ function Header() {
         <div className='heading'>
             <h1>Weather Application</h1>
         </div>
+        
+
     )
 }
 

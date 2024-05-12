@@ -23,6 +23,10 @@
     border-radius: 30px;
 }
 
+.main-body input:focus {
+    outline: none;
+}
+
 .city-name {
     margin: 1%;
     display: flex;
@@ -32,14 +36,15 @@
 }
 
 .city-name button {
-    margin-right: 5px;
-    margin-left: 5px;
+    /* margin-right: 5px;
+    margin-left: 5px; */
     padding: 10px 25px ;
     background-color: #783592;
     color: white;
     box-shadow: none;
     border-radius: 5px;
     margin: 3%;
+    border: none;
 }
 
 .result-display {
@@ -57,9 +62,42 @@
     justify-content: space-around;
 }
 
+.future-display {
+    display: flex;  
+    flex-wrap: wrap;  
+    width: 70%;
+    align-items: center;
+    justify-content: center;
+}
+
+.future-time {
+    background-color: #783592;
+    margin: 2%;
+    color: white;
+    height: 15vh;
+    width: 15vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.future-time p {
+    text-align: center;
+}
 
 @media (max-width: 900px) {
     .result-display {
         font-size: 24px;
+    }
+
+    .future-time {
+        width: 10vh;
+        height: 10vh;
+        font-size: 10px;
+
+    }
+
+    .city-name button {
+        padding: 7px 20px ;
     }
 }

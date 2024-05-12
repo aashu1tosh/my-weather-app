@@ -19,7 +19,7 @@ function Background({ id } : BackgroundProps) {
     if (id === 800)
         return (<img src={clearSky} alt="" />);
     else {
-        let i: number = firstDigit(id);
+        const i: number = firstDigit(id);
         switch (i) {
             case 2:
                 return (<img src={thunderstrom} alt="" />);
