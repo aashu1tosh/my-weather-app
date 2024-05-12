@@ -53,14 +53,19 @@ const Body = () => {
         // console.log(cityName)
     }, [cityName])
     const date: Date = new Date
-    
+
 
     return (
         <div className='main-body' style={{ backgroundColor: divBackGroundColor ?? "" }}>
             <Background id={weatherId} />
+            {/* <div className="main-body-heading">
+
+            </div> */}
             <div className="city-display">
-                {!loading ? cityName : "Loading"}
-                <p>{bs.toBik_euro(date.toJSON().split('T')[0])}</p>
+                <p id='city-name-display'>{!loading ? cityName : "Loading"}</p>
+            </div>
+            <div className="hero">
+                <p id='date realdate'>{bs.toBik_euro(date.toJSON().split('T')[0])}</p>
             </div>
             <input name="city"
                 placeholder='City Name Please'
@@ -80,12 +85,13 @@ const Body = () => {
 
             <div className="result-display">
                 {!loading ? <>
-                    <p>{temp ? `${temp}K` : 'Error!'}</p>
-                    <p>{description ? description : 'Error!'}</p></>
+                    <div><p id='temp'>{temp ? `${temp}K` : 'Error!'}</p></div>
+                    <div><p id='desc'>{description ? description : 'Error!'}</p></div>
+                    </>
                     : "Loading"}
 
             </div>
-            
+
             <div className="future-display">
                 {!loading ? (
                     fiveDays.map((day, index) => (

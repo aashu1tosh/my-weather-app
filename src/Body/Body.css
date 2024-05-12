@@ -10,13 +10,29 @@
     flex-direction: column;
     background-repeat: no-repeat;
     background-size: cover;
+    position:relative;
 }
 
 .city-display {
     font-size: 39px;
-    color: #783592;
     margin: 2%;
 }
+
+.city-display p#city-name-display{
+    background-color: #783592;
+    color: white;
+}
+.hero{
+position:absolute;
+top:10px;
+right:4px;
+}
+.hero p{
+    width:fit-content;
+    color:white;
+    background-color: #783592;
+}
+
 .main-body input {
     padding: 10px;
     border: 5px solid #783592;
@@ -27,6 +43,10 @@
     outline: none;
 }
 
+.main-body-heading {
+    display: flex;
+}
+
 .city-name {
     margin: 1%;
     display: flex;
@@ -35,9 +55,8 @@
     width: 100%;
 }
 
+
 .city-name button {
-    /* margin-right: 5px;
-    margin-left: 5px; */
     padding: 10px 25px ;
     background-color: #783592;
     color: white;
@@ -53,13 +72,21 @@
     background-color: #783592;
     margin: 3%;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     font-size: 34px;
     color: white;
     border-radius: 10px;
-    display: flex;
-    justify-content: space-around;
+
+}
+
+.result-display p#temp {
+    margin-left: 10px;
+    margin-right: auto;
+}
+
+.result-display p#desc {
+    margin-right: 10px;
 }
 
 .future-display {
@@ -79,6 +106,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 10px;
 }
 
 .future-time p {
@@ -100,4 +128,10 @@
     .city-name button {
         padding: 7px 20px ;
     }
+
+    .city-display {
+        font-size: 24px;
+        margin: 2%;
+    }
+    
 }
