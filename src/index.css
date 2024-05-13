@@ -4,13 +4,19 @@
   box-sizing: border-box;
 }
 
+
 :root {
+
+  --primary-color: rgba(255, 255, 255, 0.87);
+  --secondary-color: #242424;
   color-scheme: dark light;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: var(--secondary-color);
+  background-color: var(--primary-color);
 }
 
-@media (prefers-color-scheme: dark) {
+
+
+/* @media (prefers-color-scheme: dark) {
   :root {
     color: #213547;
     background-color: #ffffff;
@@ -29,4 +35,4 @@
     color: #242424;
     background-color: white;
   }
-}
+} */

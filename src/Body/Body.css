@@ -37,6 +37,8 @@ right:4px;
     padding: 10px;
     border: 5px solid #783592;
     border-radius: 30px;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
 }
 
 .main-body input:focus {
