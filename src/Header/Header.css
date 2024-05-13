@@ -4,6 +4,14 @@
   margin: 2%;
 }
 
+.flag-icon {
+  /* Set a fixed size for the flag */
+  width: 24px; /* Adjust this value as needed */
+  height: 16px; /* Adjust this value as needed */
+  /* Optionally, adjust other properties like margin or padding */
+  margin-right: 5px; /* Add spacing between the flag and other content */
+}
+
 
 
 @media (max-width: 900px) {

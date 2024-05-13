@@ -65,7 +65,7 @@ const Body = () => {
                 <p id='city-name-display'>{!loading ? cityName : "Loading"}</p>
             </div>
             <div className="hero">
-                <p id='date realdate'>{bs.toBik_euro(date.toJSON().split('T')[0])}</p>
+                <p id='date realdate'>{ bs.toBik_euro(date.toJSON().split('T')[0]) }</p>
             </div>
             <input name="city"
                 placeholder='City Name Please'
