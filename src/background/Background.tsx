@@ -1,12 +1,5 @@
 import './Background.css'
-import thunderstrom from '../assets/thunderstrom.webp'
-import clearSky from '../assets/clearSky.avif'
-import defaultImage from '../assets/default.jpg'
-import drizzle from '../assets/drizzle.avif'
-import rain from '../assets/rain.avif'
-import snow from '../assets/snow.avif'
-import haze from '../assets/haze.avif'
-import clouds from '../assets/clouds.avif'
+import {image} from '../config/constant/image.ts'
 
 
 //change directory case
@@ -17,30 +10,30 @@ interface BackgroundProps{
 function Background({ id } : BackgroundProps) {
 
     if (id === 800)
-        return (<img src={clearSky} alt="" />);
+        return (<img src={image.clearSky} alt="" />);
     else {
         const i: number = firstDigit(id);
         switch (i) {
             case 2:
-                return (<img src={thunderstrom} alt="" />);
+                return (<img src={image.thunderstrom} alt="" />);
                 break;
             case 3:
-                return (<img src={drizzle} alt="" />);
+                return (<img src={image.drizzle} alt="" />);
                 break;
             case 5:
-                return (<img src={rain} alt="" />);
+                return (<img src={image.rain} alt="" />);
                 break;
             case 6:
-                return (<img src={snow} alt="" />);
+                return (<img src={image.snow} alt="" />);
                 break;
             case 7:
-                return (<img src={haze} alt="" />);
+                return (<img src={image.haze} alt="" />);
                 break;
             case 8:
-                return (<img src={clouds} alt="" />);
+                return (<img src={image.clouds} alt="" />);
                 break;
             default:
-                return (<img src={defaultImage} alt="" />);
+                return (<img src={image.defaultImage} alt="" />);
         }
     }
 }
@@ -48,7 +41,6 @@ function Background({ id } : BackgroundProps) {
 export default Background
 
 function firstDigit(n: number) {
-    console.log(`firstDigit called ${n}`)
     while (n > 10) {
         n /= 10;
     }

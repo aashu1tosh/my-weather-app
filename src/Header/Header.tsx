@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import './Header.css'
 import { MdDarkMode } from "react-icons/md";
 import { IoSunny } from "react-icons/io5";
 import { US, NP } from 'country-flag-icons/react/3x2'
 
 import {weatherLabel} from '../data/language'
+import { LanguageContext } from '../context/Language';
 
 
 function Header() {
@@ -21,13 +22,14 @@ function Header() {
         }
     });
 
-    const [lang, setLang] = useState<string>('en');
+    // const [lang, setLang] = useState<string>('en');
+    const { language, changeLanguage } = useContext(LanguageContext);
 
     const languageChange = () => {
-        if (lang === 'en') {
-            setLang('np');
+        if (language === 'en') {
+            changeLanguage('np');
         } else {
-            setLang('en')
+            changeLanguage('en')
         }
     }
 
@@ -50,10 +52,9 @@ function Header() {
             <span style={{float: 'left'}} onClick={
                 languageChange
             }>
-                {lang === 'en' ? <US className="flag-icon flag-icon-us" /> : <NP className="flag-icon flag-icon-us" />}
+                {language === 'en' ? <NP className="flag-icon flag-icon-us" /> : <US className="flag-icon flag-icon-us" />}
             </span>
-                {weatherLabel.title[lang]}
-                {weatherLabel.date[lang]}
+                {weatherLabel.title[language]}
                 <span style={{ float: 'right' }} onClick={() => { setDarkTheme((prev) => !prev) }}>
                     {darkTheme ? <span><IoSunny /></span> : <MdDarkMode />}
                 </span>
