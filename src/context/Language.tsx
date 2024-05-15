@@ -1,8 +1,9 @@
+import { LanguageEnum } from '@type/global.types';
 import React, { createContext, useState } from 'react';
 
 interface LanguageContextType {
-  language: string;
-  changeLanguage: (newLanguage: string) => void;
+  language: LanguageEnum;
+  changeLanguage: (newLanguage: LanguageEnum) => void;
 }
 
 interface ReactChildren {
@@ -10,7 +11,7 @@ interface ReactChildren {
 }
 
 export const LanguageContext = createContext<LanguageContextType>({
-    language: 'en',
+    language: LanguageEnum.en,
     changeLanguage: () => { }
 
 });
@@ -20,16 +21,9 @@ export const LanguageContext = createContext<LanguageContextType>({
 // Create a provider component
 export const LanguageProvider: React.FC<ReactChildren> = ({ children }) => {
   // const [language, setLanguage] = useState<string>('en');
-  const [language, setLanguage] = useState<string>(() => {
-    const preferredLanguage = localStorage.getItem('preferred_language');
-    if (preferredLanguage !== null) {
-      return preferredLanguage;
-    } else {
-      return 'en';
-    }
-  });
+  const [language, setLanguage] = useState<LanguageEnum>((localStorage.getItem('preferred_language') as LanguageEnum) || LanguageEnum.en);
   
-  const changeLanguage = (newLanguage: string) => {
+  const changeLanguage = (newLanguage: LanguageEnum) => {
     setLanguage(newLanguage);
     localStorage.setItem('preferred_language', newLanguage);
   };

@@ -6,6 +6,7 @@ import { US, NP } from 'country-flag-icons/react/3x2'
 
 import {weatherLabel} from '../data/language'
 import { LanguageContext } from '../context/Language';
+import { LanguageEnum } from '@type/global.types';
 
 
 function Header() {
@@ -26,10 +27,13 @@ function Header() {
     const { language, changeLanguage } = useContext(LanguageContext);
 
     const languageChange = () => {
-        if (language === 'en') {
-            changeLanguage('np');
+        
+        if (language === LanguageEnum.en) {
+            changeLanguage(LanguageEnum.ne);
+            console.log("Language changed to nepali");
         } else {
-            changeLanguage('en')
+            changeLanguage(LanguageEnum.en)
+            console.log("Language changed to english");
         }
     }
 

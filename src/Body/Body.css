@@ -79,7 +79,24 @@ right:4px;
     font-size: 34px;
     color: white;
     border-radius: 10px;
+    position: relative;
 
+}
+
+.result-display select {
+    position: absolute;
+    top: 3%;
+    left: 1%;
+    border-radius: 13px;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+}
+
+.result-display select:focus {
+    border: none;
+}
+.result-display select:active {
+    border: none;
 }
 
 .result-display p#temp {

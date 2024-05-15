@@ -3,5 +3,5 @@ export type NumberLabelType = Record<string, string>
 
 export enum LanguageEnum {
     en = 'en',
-    ne = 'ne',
+    ne = 'ne'
 }

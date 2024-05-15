@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import './Footer.css'
 import { weatherLabel } from '../data/language'
 import { LanguageContext } from '../context/Language'
