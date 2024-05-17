@@ -6,6 +6,7 @@ export const weatherLabel: LabelType = {
     title: {
         en: 'Weather Application',
         ne: 'मौसम आवेदन'
+        // ne: 'Nepali ma'
     },
     footer: {
         en: 'Designed and Devloped by Aashutosh Parajuli',

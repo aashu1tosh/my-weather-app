@@ -43,48 +43,45 @@ const Body = () => {
         console.log("Event triggered")
         const unit = event.target.value;
         // Convert to celcius
-        if((unit as temperatureUnit) === temperatureUnit.C) {
-            if(tempUnit === temperatureUnit.K) {
+        if ((unit as temperatureUnit) === temperatureUnit.C) {
+            if (tempUnit === temperatureUnit.K) {
                 console.log("change to celcius from kelvin");
                 setTemp(prevTemp => Number((prevTemp - 273).toFixed(2)));
                 setTempUnit(temperatureUnit.C)
             }
-            if(tempUnit === temperatureUnit.F) {
+            if (tempUnit === temperatureUnit.F) {
                 console.log("change to celcius from farenheit");
-                setTemp(prevTemp => Number(((prevTemp -32) * 5/9 ).toFixed(2)))
+                setTemp(prevTemp => Number(((prevTemp - 32) * 5 / 9).toFixed(2)))
                 setTempUnit(temperatureUnit.C)
             }
         }
-
-
         // Convert to Farenheit
-        if((unit as temperatureUnit) === temperatureUnit.F) {
-            if(tempUnit === temperatureUnit.K) {
+        if ((unit as temperatureUnit) === temperatureUnit.F) {
+            if (tempUnit === temperatureUnit.K) {
                 console.log("change to fareheint from kelvin");
-                setTemp(prevTemp => Number(((prevTemp - 273.15) * 9/5 + 32).toFixed(2)));
+                setTemp(prevTemp => Number(((prevTemp - 273.15) * 9 / 5 + 32).toFixed(2)));
                 setTempUnit(temperatureUnit.F)
                 //(0K − 273.15) × 9/5 + 32 
             }
-            if(tempUnit === temperatureUnit.C) {
+            if (tempUnit === temperatureUnit.C) {
                 console.log("change to farenheit from celcius");
-                setTemp(prevTemp => Number(((prevTemp * 9/5) + 32).toFixed(2)));
+                setTemp(prevTemp => Number(((prevTemp * 9 / 5) + 32).toFixed(2)));
                 setTempUnit(temperatureUnit.F);
                 // (0°C × 9/5) + 32
             }
         }
-
         // Convert to Kelvin
-        if((unit as temperatureUnit) === temperatureUnit.K) {
-            if(tempUnit === temperatureUnit.C) {
+        if ((unit as temperatureUnit) === temperatureUnit.K) {
+            if (tempUnit === temperatureUnit.C) {
                 console.log("change to kelvin from celcius");
                 setTemp(prevTemp => Number((prevTemp + 273.15).toFixed(2)));
                 setTempUnit(temperatureUnit.K);
                 // 0°C + 273.15
-                
+
             }
-            if(tempUnit === temperatureUnit.F) {
+            if (tempUnit === temperatureUnit.F) {
                 console.log("change to kelvin from farenheit");
-                setTemp(prevTemp => Number(((prevTemp - 32) * 5/9 + 273.15).toFixed(2)));
+                setTemp(prevTemp => Number(((prevTemp - 32) * 5 / 9 + 273.15).toFixed(2)));
                 setTempUnit(temperatureUnit.K);
                 // (32°F − 32) × 5/9 + 273.15
             }
@@ -100,7 +97,8 @@ const Body = () => {
             .then((data) => {
                 setDivBackGroundColor(null);
                 setTemp(data.list[0].main.temp);
-                const selectValue =document.getElementById("temperature");
+                const selectValue = document.getElementById("temperature");
+                console.log(selectValue)
                 selectValue.value = 'K'
                 setTempUnit(temperatureUnit.K)
                 setWeatherID(data.list[0].weather[0].id);
@@ -157,7 +155,6 @@ const Body = () => {
                     <option value="°F">Farenheit</option>
                 </select>
                 {!loading ? <>
-                    {/* <div><p id='temp'>{temp ? `${temp}K` : 'Error!'}</p></div> */}
                     <div><p id='temp'>{temp ? (
                         `${englishNumToNepaliNum(String(temp), language)} ${tempUnit}`
                     ) : 'Error!'}</p></div>
@@ -167,12 +164,11 @@ const Body = () => {
 
             </div>
 
-            <div className="future-display">
+            {/* <div className="future-display">
                 {!loading ? (
                     fiveDays.map((day, index) => (
                         <div className='future-time' key={index}>
                             <div>
-                                {/* <p>{day.dt_txt.split(' ')[1]}</p> */}
                                 <p>{
                                     `${englishNumToNepaliNum(day.dt_txt.split(' ')[1], language)}`
                                 }</p>
@@ -189,6 +185,30 @@ const Body = () => {
                         </div>
                     ))
                 ) : "Loading"}
+            </div> */}
+
+
+            <div className="future-display">
+                {
+                    fiveDays.map((day, index) => (
+                        <div className='future-time' key={index}>
+                                <div>
+                                    <p>{
+                                        `${englishNumToNepaliNum(day.dt_txt.split(' ')[1], language)}`
+                                    }</p>
+
+                                    <p>{
+                                        `${englishNumToNepaliNum(String(temp), language)}${tempUnit}`
+                                    }</p>
+                                    <p>{
+                                        weatherLabel[day.weather[0].description.replace(' ', '_')] ?
+                                            weatherLabel[day.weather[0].description.replace(' ', '_')][language] :
+                                            day.weather[0].description.replace(' ', '_')
+                                    }</p>
+                                </div>
+                        </div>
+                    ))
+                }
             </div>
         </div>
     )

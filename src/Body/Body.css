@@ -21,6 +21,8 @@
 .city-display p#city-name-display{
     background-color: #783592;
     color: white;
+    height: 5vh;
+
 }
 .hero{
 position:absolute;
@@ -66,6 +68,10 @@ right:4px;
     border-radius: 5px;
     margin: 3%;
     border: none;
+    height: 30px;
+    width: 120px;
+    text-align: center;
+    /* flex: 1; */
 }
 
 .result-display {
@@ -149,8 +155,13 @@ right:4px;
     }
 
     .city-display {
-        font-size: 24px;
+        font-size: 28px;
         margin: 2%;
     }
+    .city-display p#city-name-display{
+        background-color: #783592;
+        color: white;
+        height: 4vh;
     
+    }
 }

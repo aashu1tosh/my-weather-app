@@ -4,7 +4,7 @@ import { weatherLabel } from '../data/language'
 import { LanguageContext } from '../context/Language'
 
 const Footer = () => {
-  const { language, } = useContext(LanguageContext);
+  const { language } = useContext(LanguageContext);
   return (
     <div className='footer'>
         {weatherLabel.footer[language]}
