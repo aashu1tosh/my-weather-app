@@ -1,12 +1,15 @@
-import { useContext, useEffect, useState } from 'react'
-import './Body.css'
-import Background from '../background/Background';
 import { LanguageContext } from '@context/Language';
-import { weatherLabel } from '@data/language'
+import { weatherLabel } from '@data/language';
+import { useContext, useEffect, useState } from 'react';
+import Background from '../background/Background';
+import './Body.css';
 
 import { englishNumToNepaliNum } from '@data/number';
 
-interface WeatherDays {
+interface WeatherDay {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    weather: any;
+    dt_txt: string,
     list: {
         main: {
             temp: number;
@@ -19,6 +22,8 @@ interface WeatherDays {
     }[];
 
 }
+
+type WeatherDays = WeatherDay[]
 
 enum temperatureUnit {
     C = "°C",
@@ -34,11 +39,12 @@ const Body = () => {
     const [weatherId, setWeatherID] = useState<number>(0);
     const [divBackGroundColor, setDivBackGroundColor] = useState<string | null>();
     const [loading, setLoading] = useState<true | false | null>();
-    const [fiveDays, setFiveDays] = useState<WeatherDays[]>([]);
+    const [fiveDays, setFiveDays] = useState<WeatherDays>();
     const [tempUnit, setTempUnit] = useState<temperatureUnit>(temperatureUnit.K);
 
     const { language, } = useContext(LanguageContext);
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleSelectChange = (event: any) => {
         console.log("Event triggered")
         const unit = event.target.value;
@@ -97,9 +103,12 @@ const Body = () => {
             .then((data) => {
                 setDivBackGroundColor(null);
                 setTemp(data.list[0].main.temp);
-                const selectValue = document.getElementById("temperature");
-                console.log(selectValue)
-                selectValue.value = 'K'
+                // Assuming this code is inside a React component or any other relevant place
+                const selectValue = document.getElementById("temperature") as HTMLSelectElement | null;
+                if (selectValue) {
+                    selectValue.value = 'K';
+                }
+
                 setTempUnit(temperatureUnit.K)
                 setWeatherID(data.list[0].weather[0].id);
                 setDescription(data.list[0].weather[0].description.replace(' ', '_'));
@@ -134,6 +143,7 @@ const Body = () => {
             </div>
             <input name="city"
                 placeholder='City Name Please'
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 onKeyDown={(e: any) => {
                     if (e.key === "Enter") {
                         const city: string = e.target.value;
@@ -164,9 +174,10 @@ const Body = () => {
 
             </div>
 
-            {/* <div className="future-display">
-                {!loading ? (
-                    fiveDays.map((day, index) => (
+
+            <div className="future-display">
+                {fiveDays &&
+                    fiveDays.map((day: WeatherDay, index) => (
                         <div className='future-time' key={index}>
                             <div>
                                 <p>{
@@ -182,30 +193,6 @@ const Body = () => {
                                         day.weather[0].description.replace(' ', '_')
                                 }</p>
                             </div>
-                        </div>
-                    ))
-                ) : "Loading"}
-            </div> */}
-
-
-            <div className="future-display">
-                {
-                    fiveDays.map((day, index) => (
-                        <div className='future-time' key={index}>
-                                <div>
-                                    <p>{
-                                        `${englishNumToNepaliNum(day.dt_txt.split(' ')[1], language)}`
-                                    }</p>
-
-                                    <p>{
-                                        `${englishNumToNepaliNum(String(temp), language)}${tempUnit}`
-                                    }</p>
-                                    <p>{
-                                        weatherLabel[day.weather[0].description.replace(' ', '_')] ?
-                                            weatherLabel[day.weather[0].description.replace(' ', '_')][language] :
-                                            day.weather[0].description.replace(' ', '_')
-                                    }</p>
-                                </div>
                         </div>
                     ))
                 }
