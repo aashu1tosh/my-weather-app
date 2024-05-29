@@ -10,7 +10,7 @@
     flex-direction: column;
     background-repeat: no-repeat;
     background-size: cover;
-    position:relative;
+    position: relative;
 }
 
 .city-display {
@@ -18,20 +18,22 @@
     margin: 2%;
 }
 
-.city-display p#city-name-display{
+.city-display p#city-name-display {
     background-color: #783592;
     color: white;
     height: 5vh;
 
 }
-.hero{
-position:absolute;
-top:10px;
-right:4px;
+
+.hero {
+    position: absolute;
+    top: 10px;
+    right: 4px;
 }
-.hero p{
-    width:fit-content;
-    color:white;
+
+.hero p {
+    width: fit-content;
+    color: white;
     background-color: #783592;
 }
 
@@ -61,7 +63,7 @@ right:4px;
 
 
 .city-name button {
-    padding: 10px 25px ;
+    padding: 10px 25px;
     background-color: #783592;
     color: white;
     box-shadow: none;
@@ -101,6 +103,7 @@ right:4px;
 .result-display select:focus {
     border: none;
 }
+
 .result-display select:active {
     border: none;
 }
@@ -115,8 +118,8 @@ right:4px;
 }
 
 .future-display {
-    display: flex;  
-    flex-wrap: wrap;  
+    display: flex;
+    flex-wrap: wrap;
     width: 70%;
     align-items: center;
     justify-content: center;
@@ -151,17 +154,29 @@ right:4px;
     }
 
     .city-name button {
-        padding: 7px 20px ;
+        padding: 7px 20px;
     }
 
     .city-display {
         font-size: 28px;
         margin: 2%;
     }
-    .city-display p#city-name-display{
+
+    .city-display p#city-name-display {
         background-color: #783592;
         color: white;
         height: 4vh;
-    
+
+    }
+}
+
+@media (max-width: 400px) {
+    .result-display {
+        font-size: 18px;
+    }
+
+    .city-display {
+        font-size: 23px;
+        margin: 2%;
     }
 }
