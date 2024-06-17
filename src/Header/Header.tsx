@@ -1,12 +1,12 @@
+import { NP, US } from 'country-flag-icons/react/3x2';
 import { useContext, useEffect, useState } from 'react';
-import './Header.css'
-import { MdDarkMode } from "react-icons/md";
 import { IoSunny } from "react-icons/io5";
-import { US, NP } from 'country-flag-icons/react/3x2'
+import { MdDarkMode } from "react-icons/md";
+import './Header.css';
 
-import {weatherLabel} from '../data/language'
-import { LanguageContext } from '../context/Language';
 import { LanguageEnum } from '@type/global.types';
+import { LanguageContext } from '../context/Language';
+import { weatherLabel } from '../data/language';
 
 
 function Header() {
@@ -27,7 +27,7 @@ function Header() {
     const { language, changeLanguage } = useContext(LanguageContext);
 
     const languageChange = () => {
-        
+
         if (language === LanguageEnum.en) {
             changeLanguage(LanguageEnum.ne);
             console.log("Language changed to nepali");
@@ -53,17 +53,17 @@ function Header() {
     return (
         <div className='heading'>
             <h1>
-            <span style={{float: 'left'}} onClick={
-                languageChange
-            }>
-                {language === 'en' ? <NP className="flag-icon flag-icon-us" /> : <US className="flag-icon flag-icon-us" />}
-            </span>
+                <span style={{ float: 'left' }} onClick={
+                    languageChange
+                }>
+                    {language === 'en' ? <NP className="flag-icon flag-icon-us" /> : <US className="flag-icon flag-icon-us" />}
+                </span>
                 {weatherLabel.title[language]}
                 <span style={{ float: 'right' }} onClick={() => { setDarkTheme((prev) => !prev) }}>
-                    {darkTheme ? <span><IoSunny /></span> : <MdDarkMode />}
+                    {darkTheme ? <span><IoSunny size={25} /></span> : <MdDarkMode size={25} />}
                 </span>
             </h1>
-            
+
 
 
 
